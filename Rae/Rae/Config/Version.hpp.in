@@ -1,0 +1,17 @@
+#pragma once
+
+#define RAE_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define RAE_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define RAE_VERSION_PATCH @PROJECT_VERSION_PATCH@
+#define RAE_VERSION_STRING "@PROJECT_VERSION@"
+
+namespace Rae {
+
+struct Version {
+    static constexpr int kMajor = RAE_VERSION_MAJOR;
+    static constexpr int kMinor = RAE_VERSION_MINOR;
+    static constexpr int kPatch = RAE_VERSION_PATCH;
+    static constexpr const char* kString = RAE_VERSION_STRING;
+};
+
+}  // namespace Rae
