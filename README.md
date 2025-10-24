@@ -4,6 +4,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Status](https://img.shields.io/badge/status-in%20development-orange.svg)
 
+[![Build](https://github.com/Krish2882005/Rae/actions/workflows/build.yml/badge.svg)](https://github.com/Krish2882005/Rae/actions/workflows/build.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/krish2882005/rae/badge)](https://www.codefactor.io/repository/github/krish2882005/rae)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Krish2882005_Rae&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Krish2882005_Rae)
 
