@@ -17,6 +17,11 @@ if(PROJECT_IS_TOP_LEVEL)
     set(CMAKE_CXX_EXTENSIONS OFF)
     
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+    
+    list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+    option(ENABLE_CLANG_TIDY "Enable clang-tidy static analysis" ON)
+    include(ClangTidy)
 endif()
 
 add_subdirectory(Rae)
