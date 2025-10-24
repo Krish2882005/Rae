@@ -17,6 +17,7 @@ target_sources(Rae
             ${CMAKE_CURRENT_BINARY_DIR}/include
         FILES 
             Rae/Rae.hpp
+            Rae/Core/Base.hpp
             ${CMAKE_CURRENT_BINARY_DIR}/include/Rae/Config/Version.hpp
 )
 
