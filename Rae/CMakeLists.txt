@@ -8,7 +8,7 @@ configure_file(
 )
 
 target_sources(Rae
-PRIVATE
+    PRIVATE
         Rae/Rae.cpp
     PUBLIC
         FILE_SET HEADERS
@@ -26,6 +26,8 @@ target_include_directories(Rae
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
+
+target_link_libraries(Rae PRIVATE Rae::warnings)
 
 set_target_properties(Rae PROPERTIES
     CXX_STANDARD 23

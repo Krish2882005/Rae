@@ -22,6 +22,8 @@ if(PROJECT_IS_TOP_LEVEL)
 
     option(ENABLE_CLANG_TIDY "Enable clang-tidy static analysis" ON)
     include(ClangTidy)
+
+    include(CompilerWarnings)
 endif()
 
 add_subdirectory(Rae)
