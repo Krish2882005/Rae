@@ -1,0 +1,90 @@
+# Build directories
+build/
+build-*/
+out/
+install/
+cmake-build-*/
+_build/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+CMakeLists.txt.user
+CMakeUserPresets.json
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Linker and debug files
+*.ilk
+*.pdb
+*.dwo
+
+# Fortran module files
+*.mod
+*.smod
+
+# vcpkg
+vcpkg_installed/
+
+# IDE - Visual Studio
+.vs/
+*.user
+*.suo
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+
+# IDE - VSCode
+.vscode/
+!.vscode/extensions.json
+!.vscode/tasks.json
+
+# IDE - CLion
+.idea/
+cmake-build-*/
+
+# IDE - Xcode
+*.xcodeproj
+*.xcworkspace
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Testing
+Testing/
