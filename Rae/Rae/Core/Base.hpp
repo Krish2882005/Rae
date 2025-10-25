@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <memory>
+#include <type_traits>
 #include <utility>
 
 #include "Rae/Config/Version.hpp"
@@ -138,5 +139,31 @@ template <typename T, typename... Args>
 template <typename T, typename... Args>
 [[nodiscard]] auto CreateRef(Args&&... args) -> Ref<T> {
     return std::make_shared<T>(std::forward<Args>(args)...);
+}
+
+// --- Bit Manipulation Utilities ---
+
+template <typename T>
+    requires std::is_enum_v<T>
+[[nodiscard]] constexpr auto BitSet(T value, T flag) noexcept -> T {
+    auto v = std::to_underlying(value);
+    auto f = std::to_underlying(flag);
+    return static_cast<T>(v | f);
+}
+
+template <typename T>
+    requires std::is_enum_v<T>
+[[nodiscard]] constexpr auto BitClear(T value, T flag) noexcept -> T {
+    auto v = std::to_underlying(value);
+    auto f = std::to_underlying(flag);
+    return static_cast<T>(v & ~f);
+}
+
+template <typename T>
+    requires std::is_enum_v<T>
+[[nodiscard]] constexpr auto BitTest(T value, T flag) noexcept -> bool {
+    auto v = std::to_underlying(value);
+    auto f = std::to_underlying(flag);
+    return (v & f) != 0;
 }
 } // namespace Rae
