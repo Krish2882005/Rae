@@ -2,6 +2,8 @@
 
 #include "Rae/Config/Version.hpp"
 
+// --- Environment Detection ---
+
 // Platform Detection
 #if defined(_WIN32)
 #define RAE_PLATFORM_WINDOWS
@@ -50,4 +52,49 @@
 #define RAE_RELEASE
 #else
 #define RAE_DEBUG
+#endif
+
+// --- Compiler Hints & Attributes ---
+
+// forceinline
+#if defined(RAE_COMPILER_MSVC)
+#define RAE_FORCE_INLINE __forceinline
+#elif defined(RAE_COMPILER_CLANG) || defined(RAE_COMPILER_GCC)
+#define RAE_FORCE_INLINE inline __attribute__((always_inline))
+#else
+#define RAE_FORCE_INLINE inline
+#endif
+
+// noinline
+#if defined(RAE_COMPILER_MSVC)
+#define RAE_NO_INLINE __declspec(noinline)
+#elif defined(RAE_COMPILER_CLANG) || defined(RAE_COMPILER_GCC)
+#define RAE_NO_INLINE __attribute__((noinline))
+#else
+#define RAE_NO_INLINE
+#endif
+
+// Debug break
+#if defined(RAE_COMPILER_MSVC)
+#define RAE_DEBUGBREAK() __debugbreak()
+#elif defined(RAE_COMPILER_CLANG)
+#define RAE_DEBUGBREAK() __builtin_debugtrap()
+#elif defined(RAE_COMPILER_GCC)
+#include <csignal>
+#define RAE_DEBUGBREAK() ::std::raise(SIGTRAP)
+#else
+#define RAE_DEBUGBREAK() ((void)0)
+#endif
+
+// no_unique_address
+#if defined(__has_cpp_attribute)
+#if __has_cpp_attribute(no_unique_address)
+#define RAE_NO_UNIQUE_ADDRESS [[no_unique_address]]
+#elif defined(RAE_COMPILER_MSVC) && __has_cpp_attribute(msvc::no_unique_address)
+#define RAE_NO_UNIQUE_ADDRESS [[msvc::no_unique_address]]
+#else
+#define RAE_NO_UNIQUE_ADDRESS
+#endif
+#else
+#define RAE_NO_UNIQUE_ADDRESS
 #endif
