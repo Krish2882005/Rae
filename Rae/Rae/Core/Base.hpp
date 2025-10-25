@@ -2,6 +2,8 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <memory>
+#include <utility>
 
 #include "Rae/Config/Version.hpp"
 
@@ -102,7 +104,7 @@
 #define RAE_NO_UNIQUE_ADDRESS
 #endif
 
-// --- Common Type Aliases ---
+// --- Fundamental Type Aliases ---
 
 namespace Rae {
 using Int8 = std::int8_t;
@@ -116,4 +118,25 @@ using UInt32 = std::uint32_t;
 using UInt64 = std::uint64_t;
 
 using Byte = std::byte;
+
+// --- Smart Pointer Aliases & Factories ---
+
+template <typename T>
+using Scope = std::unique_ptr<T>;
+
+template <typename T>
+using Ref = std::shared_ptr<T>;
+
+template <typename T>
+using WeakRef = std::weak_ptr<T>;
+
+template <typename T, typename... Args>
+[[nodiscard]] constexpr auto CreateScope(Args&&... args) -> Scope<T> {
+    return std::make_unique<T>(std::forward<Args>(args)...);
+}
+
+template <typename T, typename... Args>
+[[nodiscard]] auto CreateRef(Args&&... args) -> Ref<T> {
+    return std::make_shared<T>(std::forward<Args>(args)...);
+}
 } // namespace Rae
