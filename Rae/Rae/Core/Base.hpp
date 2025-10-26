@@ -110,6 +110,14 @@
 #define RAE_NO_UNIQUE_ADDRESS
 #endif
 
+// --- String Utilities ---
+
+#define RAE_STRINGIFY_IMPL(x) #x
+#define RAE_STRINGIFY(x) RAE_STRINGIFY_IMPL(x)
+
+#define RAE_CONCAT_IMPL(x, y) x##y
+#define RAE_CONCAT(x, y) RAE_CONCAT_IMPL(x, y)
+
 // --- Assertion System ---
 
 namespace Rae::Internal {
