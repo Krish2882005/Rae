@@ -2,7 +2,12 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <cstdio>
+#include <cstdlib>
 #include <memory>
+#include <print>
+#include <source_location>
+#include <string_view>
 #include <type_traits>
 #include <utility>
 
@@ -103,6 +108,40 @@
 #endif
 #else
 #define RAE_NO_UNIQUE_ADDRESS
+#endif
+
+// --- Assertion System ---
+
+namespace Rae::Internal {
+[[noreturn]] inline void FatalAssertHandler(std::string_view expression, std::string_view message,
+                                            const std::source_location& location) noexcept {
+    std::println(stderr, "\n{}\n  {} failed\n  {}:{} in {}", message, expression,
+                 location.file_name(), location.line(), location.function_name());
+
+    std::fflush(stderr);
+    RAE_DEBUGBREAK();
+    std::abort();
+}
+} // namespace Rae::Internal
+
+#define RAE_ASSERT(expr, msg)                                                                      \
+    do {                                                                                           \
+        if (!(expr)) [[unlikely]] {                                                                \
+            auto loc = std::source_location::current();                                            \
+            ::Rae::Internal::FatalAssertHandler(RAE_STRINGIFY(expr), msg, loc);                    \
+        }                                                                                          \
+    } while (false)
+
+#ifdef RAE_DEBUG
+#define RAE_DEBUG_ASSERT(expr, msg) RAE_ASSERT(expr, msg)
+#else
+#define RAE_DEBUG_ASSERT(expr, msg) static_cast<void>(0)
+#endif
+
+#ifdef RAE_DEBUG
+#define RAE_VERIFY(expr) RAE_ASSERT(expr, "Verification failed")
+#else
+#define RAE_VERIFY(expr) static_cast<void>(expr)
 #endif
 
 // --- Fundamental Type Aliases ---
